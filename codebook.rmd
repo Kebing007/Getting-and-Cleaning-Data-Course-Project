@@ -14,21 +14,14 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 ###4.read data
 read and create corresbonding sub dataset of suject, activity and features for train and test 
 
-###6. merge
-merge train and test data
+###5. merge
+up and down merge train and test data of subject and activity
+left and right merge subject, activity and Feathre
 
-
-names(Subject) <- c("subject")
-names(Activity) <- c("activity")
-FeatureNames <- read.table(file.path(path_rf, "features.txt"), header=FALSE)
-names(Feature) <-  FeatureNames$V2
-dataComb <- cbind(Subject, Activity)
-Data <- cbind(Feature, dataComb)
-
-###7. extracs mean and std
-###8. name the activity
-###9. updata names
-###10. Write the tidy data
+###6. extracs mean and std
+###7. name the activity
+###8. updata names
+###9. Write the tidy data
 
 
 **68 combined Variable name used in the dataset:**          
