@@ -1,0 +1,60 @@
+#1. dowload the file
+folder<-"./data"
+if(!file.exists(folder)) {dir.create(folder)}
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+filename <- "HAR Dataset.zip"
+filedest<- paste(folder, filename, sep="/")
+if(!file.exists(filedest)) {download.file(fileUrl, destfile=filedest)}
+
+#2. Unzip file
+unzip(zipfile=filename, exdir=folder)
+
+#3. Get list of files
+path_rf <- file.path(folder, "UCI HAR Dataset")
+files <- list.files(path_rf, recursive = TRUE)
+fiels
+
+#4.read data
+
+# read subject files
+SubjectTrain <- read.table(file.path(path_rf, "train", "subject_train.txt"), header=FALSE)
+SubjectTest <- read.table(file.path(path_rf, "test", "subject_test.txt"), header=FALSE)
+
+# read activity files
+ActivityTrain <- read.table(file.path(path_rf, "train", "Y_train.txt"), header = FALSE)
+ActivityTest <- read.table(file.path(path_rf, "test", "Y_test.txt"), header = FALSE)
+
+# read feature files
+FeatureTrain <- read.table(file.path(path_rf, "train", "X_train.txt"), header = FALSE)
+FeatureTest <- read.table(file.path(path_rf, "test", "X_test.txt"), header = FALSE)
+
+#6. merge
+Subject <- rbind(SubjectTrain, SubjectTest)
+Activity <- rbind(ActivityTrain, ActivityTest)
+Feature <- rbind(FeatureTrain, FeatureTest)
+
+names(Subject) <- c("subject")
+names(Activity) <- c("activity")
+FeatureNames <- read.table(file.path(path_rf, "features.txt"), header=FALSE)
+names(Feature) <-  FeatureNames$V2
+dataComb <- cbind(Subject, Activity)
+Data <- cbind(Feature, dataComb)
+
+#7. extracs mean and std
+subFeatureNames <- FeatureNames$V2[grep("mean\\(\\)|std\\(\\)", FeatureNames$V2)]
+selectedNames <- c(as.character(subFeatureNames), "subject", "activity")
+Data <- subset(Data, select =selectedNames )
+
+#8. name the activity
+ActivityLabel <- read.table(file.path(path_rf, "activity_labels.txt"), header = FALSE)
+Data$activity <-factor(Data$activity, labels = as.character(ActivityLabel$V2))
+
+#9. updata names
+names(Data) <- gsub("^t", "time", names(Data))
+names(Data) <- gsub("^f", "frequency", names(Data))
+names(Data) <- gsub("Acc", "Accelerometer", names(Data))
+names(Data) <- gsub("Gyro", "Gyroscope", names(Data))
+names(Data) <- gsub("Mag", "Magnitude", names(Data))
+names(Data) <- gsub("BodyBody", "Body", names(Data))
+
+names(Data)
