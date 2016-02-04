@@ -28,7 +28,7 @@ ActivityTest <- read.table(file.path(path_rf, "test", "Y_test.txt"), header = FA
 FeatureTrain <- read.table(file.path(path_rf, "train", "X_train.txt"), header = FALSE)
 FeatureTest <- read.table(file.path(path_rf, "test", "X_test.txt"), header = FALSE)
 
-#6. merge
+#5. merge
 Subject <- rbind(SubjectTrain, SubjectTest)
 Activity <- rbind(ActivityTrain, ActivityTest)
 Feature <- rbind(FeatureTrain, FeatureTest)
@@ -40,16 +40,16 @@ names(Feature) <-  FeatureNames$V2
 dataComb <- cbind(Subject, Activity)
 Data <- cbind(Feature, dataComb)
 
-#7. extracs mean and std
+#6. extracs mean and std
 subFeatureNames <- FeatureNames$V2[grep("mean\\(\\)|std\\(\\)", FeatureNames$V2)]
 selectedNames <- c(as.character(subFeatureNames), "subject", "activity")
 Data <- subset(Data, select =selectedNames )
 
-#8. name the activity
+#7. name the activity
 ActivityLabel <- read.table(file.path(path_rf, "activity_labels.txt"), header = FALSE)
 Data$activity <-factor(Data$activity, labels = as.character(ActivityLabel$V2))
 
-#9. updata names
+#8. updata names
 names(Data) <- gsub("^t", "time", names(Data))
 names(Data) <- gsub("^f", "frequency", names(Data))
 names(Data) <- gsub("Acc", "Accelerometer", names(Data))
@@ -57,7 +57,7 @@ names(Data) <- gsub("Gyro", "Gyroscope", names(Data))
 names(Data) <- gsub("Mag", "Magnitude", names(Data))
 names(Data) <- gsub("BodyBody", "Body", names(Data))
 
-#10. Write the tidy data
+#9. Write the tidy data
 library(plyr)
 Data2 <- aggregate(. ~ subject +activity, Data, mean)
 Data2 <- Data2[order(Data2$subject,Data2$activity),]
