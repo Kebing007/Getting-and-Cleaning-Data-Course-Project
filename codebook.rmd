@@ -16,6 +16,7 @@ read and create corresbonding sub dataset of suject, activity and features for t
 
 ###5. merge
 up and down merge train and test data of subject and activity
+
 left and right merge subject, activity and Feathre
 
 ###6. extracs mean and std
