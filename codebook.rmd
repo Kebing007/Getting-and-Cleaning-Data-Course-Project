@@ -1,17 +1,13 @@
 ##Process and Variables
 ###The Process of run analysis
-* 1. dowload the file
+###1. dowload the file
 
 The site where the data was dowload:  
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones      
 The data for the project:  
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-The storage folder:
- "./Data"
 
-
-#2. Unzip file
-unzip(zipfile=filename, exdir=folder)
+###2. Unzip file
 
 #3. Get list of files
 path_rf <- file.path(folder, "UCI HAR Dataset")
@@ -66,3 +62,72 @@ library(plyr)
 Data2 <- aggregate(. ~ subject +activity, Data, mean)
 Data2 <- Data2[order(Data2$subject,Data2$activity),]
 write.table(Data2, file="tidydata.txt", row.name=FALSE)
+
+**68 combined Variable name used in the dataset:**          
+--------------------------------
+- timeBodyAccelerometer-mean()-X              
+- timeBodyAccelerometer-mean()-Y              
+- timeBodyAccelerometer-mean()-Z              
+- timeBodyAccelerometer-std()-X               
+- timeBodyAccelerometer-std()-Y
+- timeBodyAccelerometer-std()-Z
+- timeGravityAccelerometer-mean()-X
+- timeGravityAccelerometer-mean()-Y
+- timeGravityAccelerometer-mean()-Z
+- timeGravityAccelerometer-std()-X
+- timeGravityAccelerometer-std()-Y
+- timeGravityAccelerometer-std()-Z
+- timeBodyAccelerometerJerk-mean()-X
+- timeBodyAccelerometerJerk-mean()-Y
+- timeBodyAccelerometerJerk-mean()-Z
+- timeBodyAccelerometerJerk-std()-X
+- timeBodyAccelerometerJerk-std()-Y
+- timeBodyAccelerometerJerk-std()-Z
+- timeBodyGyroscope-mean()-X
+- timeBodyGyroscope-mean()-Y
+- timeBodyGyroscope-mean()-Z
+- timeBodyGyroscope-std()-X
+- timeBodyGyroscope-std()-Y
+- timeBodyGyroscope-std()-Z
+- timeBodyGyroscopeJerk-mean()-X
+- timeBodyGyroscopeJerk-mean()-Y
+- timeBodyGyroscopeJerk-mean()-Z
+- timeBodyGyroscopeJerk-std()-X
+- timeBodyGyroscopeJerk-std()-Y
+- timeBodyGyroscopeJerk-std()-Z
+- timeBodyAccelerometerMagnitude-mean()
+- timeBodyAccelerometerMagnitude-std()
+- timeGravityAccelerometerMagnitude-mean()
+- timeGravityAccelerometerMagnitude-std()
+- timeBodyAccelerometerJerkMagnitude-mean()
+- timeBodyAccelerometerJerkMagnitude-std()
+- timeBodyGyroscopeMagnitude-mean()
+- timeBodyGyroscopeMagnitude-std()
+- timeBodyGyroscopeJerkMagnitude-mean()
+- timeBodyGyroscopeJerkMagnitude-std()
+- frequencyBodyAccelerometer-mean()-X
+- frequencyBodyAccelerometer-mean()-Y
+- frequencyBodyAccelerometer-mean()-Z
+- frequencyBodyAccelerometer-std()-X
+- frequencyBodyAccelerometer-std()-Y
+- frequencyBodyAccelerometer-std()-Z
+- frequencyBodyAccelerometerJerk-mean()-X
+- frequencyBodyAccelerometerJerk-mean()-Y
+- frequencyBodyAccelerometerJerk-mean()-Z
+- frequencyBodyAccelerometerJerk-std()-X
+- frequencyBodyAccelerometerJerk-std()-Y
+- frequencyBodyAccelerometerJerk-std()-Z
+- frequencyBodyGyroscope-mean()-X
+- frequencyBodyGyroscope-mean()-Y
+- frequencyBodyGyroscope-mean()-Z
+- frequencyBodyGyroscope-std()-X
+- frequencyBodyGyroscope-std()-Y
+- frequencyBodyGyroscope-std()-Z
+- frequencyBodyAccelerometerMagnitude-mean()
+- frequencyBodyAccelerometerMagnitude-std()
+- frequencyBodyAccelerometerJerkMagnitude-mean()
+- frequencyBodyAccelerometerJerkMagnitude-std()
+- frequencyBodyGyroscopeMagnitude-mean()
+- frequencyBodyGyroscopeMagnitude-std()
+- frequencyBodyGyroscopeJerkMagnitude-mean()
+- frequencyBodyGyroscopeJerkMagnitude-std()
